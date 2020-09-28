@@ -10,11 +10,23 @@ import '../css/card-manager.css'
 class CardsManager extends React.Component {
   constructor(props) {
 		super(props);
+		this.state = {cards:[],categories:[],	clickedCard:null , newCardSubmitted:false};
+		this.getCards();
+		
 		// console.log("props",this.props.location.state.cards);
 		//.location.cards
-    this.state = { cards: this.props.location.state.cards , clickedCard:null , newCardSubmitted:false};
-  }
+		// this.state = { cards: this.props.location.state.cards ,
+		// 							 categories: this.props.location.state.categories , 
+		// 								clickedCard:null , 
+		// 								newCardSubmitted:false};
+  	}
 
+		async getCards() {
+			const response = await mockapi.get("flashcards");
+			this.setState({ cards: response.data });
+			// this.setState({isLoading:false});
+			console.log("all cards",response);
+		}
 	// callback functions
 	// no callback to app... just change in api 
 	// and app will fetch from api most updated state
@@ -66,7 +78,32 @@ class CardsManager extends React.Component {
 			this.editCardState(card);
 			//this.setState({isLoading:false});
 	}
+	// callbacks for categories
+	onEditCategory = async (category) => {
 
+	}
+	// deleting a category will delete all flashcards in this category
+	onDeleteCategory = async (category) => {
+
+	}
+	onAddCategory = async (category) => {
+		
+	}
+	renderCategories(){
+		const categoriesComp = this.state.categories.map(
+			cat => {
+				return <div
+								className="category"
+								key={cat.id}
+								// editCategory={this.onEditCategory}
+								// deleteCategory={this.onDeleteCategory}
+								>
+									{cat.category}
+								</div>
+			}
+		);
+		return categoriesComp;
+	}
 	renderAllCards(){
 		const cardsComp = this.state.cards.map(
 			card => {
@@ -99,6 +136,7 @@ class CardsManager extends React.Component {
 		
     return (	
 					<div>
+						{this.renderCategories()}
 						<div className="cardsContainer">
 						{this.renderAllCards()}
 						</div>

@@ -1,0 +1,24 @@
+.header{
+	width: 100%;
+	background-color: grey;
+	padding: 5px;
+	display: flex;
+	flex-direction: row;
+}
+.myItem{
+	padding: 5px;
+	color: white;
+	text-decoration: none;
+}
+.myItem:hover {
+	text-decoration: underline;
+}
+.category{
+	border: 1px solid black;
+}
+.selected{
+	background-color: grey;
+}
+.category:hover{
+	background-color: grey;
+}

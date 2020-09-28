@@ -1,23 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../css/homepage.css'
 
 const Header = (props) => {
   return (
-    <div className='ui secondary pointing menu'>
-			<Link to='/' className='item'>Homepage</Link>
-      <Link    
+    <div className='header'>
+			<Link to='/' className='myItem'>Homepage</Link>
+      <Link className='myItem'
       to={{
-        pathname:'/flashcards' ,
-        className:'item',
-        state: {cards: props.cards}
+        pathname:'/history' ,
+        // state: {cards: props.cards}
       }}
-      >Flash Cards</Link>
-      <Link 
+      >History</Link>
+      <Link className='myItem'
       to={{ 
         pathname: '/cardsmanager', 
-        state: { cards: props.cards } 
+        // state: { cards: props.cards , categories: props.categories} 
       }}
-      className='item'
       >Cards Manager</Link>
 
     </div>

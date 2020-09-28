@@ -1,21 +1,46 @@
 import React from "react";
 import Button from './Button';
+import '../css/flashcards.css'
+import mockapi from "../api/mockapi";
 
 class FlashCards extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    this.state = { cards: this.props.location.state.cards , currentCard:[], isAnswerRevealed:false, completed:0};
-    this.flashCardsNumber = this.props.location.state.cards.length;
+    // this.state = { cards: this.props.location.state.cards , currentCard:[], isAnswerRevealed:false, completed:0};
+    // this.flashCardsNumber = this.props.location.state.cards.length;
+    this.state = {cards:[],currentCard:[], isAnswerRevealed:false, completed:0,flashCardsNumber:0,onFinished:false};
+    this.originalCards = [];
+    this.getCards();
   }
   componentDidMount(){
-    this.getRandomCard();
+    // this.getRandomCard();
+  }
+  restartGame = () => {
+    console.log("restart game");
+    console.log(this.originalCards);
+    
+    this.setState({cards:this.originalCards,currentCard:[], isAnswerRevealed:false, completed:0,onFinished:false},()=>{
+      console.log(this.state);
+      this.getRandomCard();
+    });
   }
  
 
+  async getCards() {
+    const response = await mockapi.get("flashcards");
+    this.setState({ cards: response.data , flashCardsNumber:response.data.length});
+    // this.setState({isLoading:false});
+    this.originalCards = response.data;
+    console.log("all cards",response);
+    this.getRandomCard();
+
+  }
+
   getRandomCard(){
+    
     const randomIndex =  Math.floor(Math.random() * Math.floor(this.state.cards.length));
     this.setState({currentCard:this.state.cards[randomIndex]})
+    console.log("choosing random card",this.state);
   }
 
   // callbacks
@@ -43,18 +68,28 @@ class FlashCards extends React.Component {
       {
         const temp = [...this.state.cards];
         temp.splice(i, 1);
-        this.setState({cards: temp,completed:this.state.completed+1});
+        this.setState({cards: temp,completed:this.state.completed+1},
+          () => {
+            if(this.state.completed === this.state.flashCardsNumber)
+            {
+              // game finished
+              this.setState({onFinished:true});
+            }
+            else
+            {
+              this.getRandomCard();
+            }
+          }
+          );
       }
     }
     this.setState({isAnswerRevealed:false});
-    this.getRandomCard();
-
   }
   renderQuestion(){
     return (
       <div>
         <div>
-          {this.state.currentCard.question}
+          {this.state.currentCard ? this.state.currentCard.question : null}
         </div>
         <Button
           text = 'New Card'
@@ -70,7 +105,7 @@ class FlashCards extends React.Component {
   renderProgressBar(){
     return (
       <div>
-        Completed {this.state.completed}/{this.flashCardsNumber}
+        Completed {this.state.completed}/{this.state.flashCardsNumber}
       </div>
     );
   }
@@ -93,14 +128,32 @@ class FlashCards extends React.Component {
     );
   }
 
+  renderFinish(){
+    const date = new Date();
+    let times = JSON.parse(localStorage.getItem(date.toDateString()));
+    times = times ? times+1 : 1;
+    localStorage.setItem(`${date.toDateString()}`, times);
 
+    return (<div>
+      <h1>Done!</h1>
+      {this.renderProgressBar()} 
+      <Button
+      text = "shuffle"
+      callback = {this.restartGame}
+      ></Button>
+    </div>);
+
+  }
   // <Link to={{pathname:"/Topics/", customObject: cu22222stomValue}}>
 
   render() {
+    if(this.state.onFinished){
+      return this.renderFinish();
+    }
     return (
     <div>
-      {this.state.isAnswerRevealed ? this.renderAnswer()  : this.renderQuestion()} 
-      {this.renderProgressBar()}
+        {this.state.isAnswerRevealed ? this.renderAnswer()  : this.renderQuestion()} 
+        {this.renderProgressBar()} 
     </div>
     );
   }

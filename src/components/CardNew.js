@@ -18,6 +18,7 @@ class CardNew extends React.Component {
 			<Form
 			question=""
 			answer=""
+			category=""
 			callback={this.props.addCard}
 			></Form>
 		);

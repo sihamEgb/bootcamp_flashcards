@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/form.css'
 
 
 class Form extends React.Component {
@@ -47,6 +48,9 @@ class Form extends React.Component {
 				value={this.state.answer}
 				onChange={this.handleChange}
 			/>
+			</label>
+			<label>
+				Category:
 			</label>
 			<input type="submit" value="Submit" />
 		</form>
