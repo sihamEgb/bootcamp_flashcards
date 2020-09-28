@@ -1,0 +1,9 @@
+.cardsContainer{
+	display: flex;
+	flex-direction: column;
+}
+.cardEdit{
+	border: 1px solid black;
+	padding: 5px;
+	margin: 2px;
+}
