@@ -9,19 +9,29 @@ class Homepage extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {categories:[],selected:[]};
+    this.state = {allCards:[],selectedCards:[],selectedCategories:[]};
+    this.allCategories = [];
+    this.getCards();
     this.getCategories();
+    // this.getCategories();
+  }
+  async getCards() {
+    const response = await mockapi.get("flashcards");
+    this.setState({ cards: response.data , selectedCards:response.data});
+    // this.setState({isLoading:false});
+    console.log("all cards",response);
   }
 
-  getCategories = async () => {
+  
+  getCategories = () => {
     console.log("11111");
-    const response = await mockapi.get("categories");
-    console.log("2222");
+    // const response = await mockapi.get("categories");
+    // console.log("2222");
 
-    console.log("all categories",response);
-    this.setState({ categories: response.data});
-    // this.setState({isLoading:false});
-    console.log("3333");
+    // console.log("all categories",response);
+    // this.setState({ categories: response.data});
+    // // this.setState({isLoading:false});
+    // console.log("3333");
 
   }
   clickCategory = (e) => {
@@ -50,35 +60,35 @@ class Homepage extends React.Component{
         }
   }
   
-  renderCategories = () => {
-    // return this.state.categories.findIndex(category);
-    console.log("in render categorues",this.state);
-    return this.state.categories.map(
-      category => {
-        console.log("category",category);
-        let selected = "selected";
-        if((this.state.selected.length > 0) && (this.state.selected.findIndex(category) === -1))
-        {
-          // console.log("gse");
-        }
-        else
-        {
-          selected = "";
-        }
-        return (
-          <div 
-          className={`category ${selected}`}
-          key = {category.id}
-          id = {category.id}
-          category = {category.category}
-          onClick = {this.clickCategory}
-          >
-            {category.category}
-          </div>
-        );
-      }
-    );
-  }
+  // renderCategories = () => {
+  //   // return this.state.categories.findIndex(category);
+  //   console.log("in render categorues",this.state);
+  //   return this.state.categories.map(
+  //     category => {
+  //       console.log("category",category);
+  //       let selected = "selected";
+  //       if((this.state.selected.length > 0) && (this.state.selected.findIndex(category) === -1))
+  //       {
+  //         // console.log("gse");
+  //       }
+  //       else
+  //       {
+  //         selected = "";
+  //       }
+  //       return (
+  //         <div 
+  //         className={`category ${selected}`}
+  //         key = {category.id}
+  //         id = {category.id}
+  //         category = {category.category}
+  //         onClick = {this.clickCategory}
+  //         >
+  //           {category.category}
+  //         </div>
+  //       );
+  //     }
+  //   );
+  // }
 
   onStartGame = () => {
     console.log("game starting"); 
@@ -98,7 +108,7 @@ class Homepage extends React.Component{
             <Link className="primaryButton"
               to={{
                 pathname:'/flashcards' ,
-                state: {cards: this.props.cards}
+                state: {cards: this.state.selectedCards}
               }}
               >Start Training</Link>
         </div>

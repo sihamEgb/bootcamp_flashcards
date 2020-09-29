@@ -7,7 +7,7 @@ import Homepage from "./Homepage";
 import Header from "./Header";
 import FlashCards from "./FlashCards";
 import CardsManager from "./CardsManager";
-
+import History2 from "./History2";
 class App extends React.Component{
   
   constructor(props){
@@ -38,7 +38,7 @@ class App extends React.Component{
               <Route exact path='/' component={Homepage} />
               <Route exact path='/flashcards' component={FlashCards} />
               <Route exact path='/cardsmanager' component={CardsManager} />
-              <Route exact path='/history' component={History} />
+              <Route exact path='/history' component={History2} />
               {/* <Route exact path='/products/:id' component={ProductDetail} /> */}
             </div>
           </BrowserRouter>

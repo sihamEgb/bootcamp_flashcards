@@ -8,12 +8,24 @@ class FlashCards extends React.Component {
     super(props);
     // this.state = { cards: this.props.location.state.cards , currentCard:[], isAnswerRevealed:false, completed:0};
     // this.flashCardsNumber = this.props.location.state.cards.length;
-    this.state = {cards:[],currentCard:[], isAnswerRevealed:false, completed:0,flashCardsNumber:0,onFinished:false};
-    this.originalCards = [];
-    this.getCards();
+    this.state = {
+      cards:this.props.location.state.cards,
+      currentCard:[], 
+      isAnswerRevealed:false, 
+      completed:0,
+      flashCardsNumber:this.props.location.state.cards.length,
+      onFinished:false};
+    this.originalCards = this.props.location.state.cards;
+    // this.getCards();
+
+    // this.setState({ cards: response.data , flashCardsNumber:response.data.length});
+    // this.setState({isLoading:false});
+    // this.originalCards = response.data;
+    // console.log("all cards",response);
+    // this.getRandomCard();
   }
   componentDidMount(){
-    // this.getRandomCard();
+    this.getRandomCard();
   }
   restartGame = () => {
     console.log("restart game");
@@ -139,8 +151,12 @@ class FlashCards extends React.Component {
     const date = new Date();
     let stats = JSON.parse(localStorage.getItem('stats'));
     const newDate = date.toDateString();
+    if(stats === null){
+      stats = [];
+      stats.push(newDate);
+    }
     //`${date.toDateString()}`
-    if(stats[stats.length-1] === newDate){
+    else if(stats[stats.length-1] === newDate){
 
     }
     else{
