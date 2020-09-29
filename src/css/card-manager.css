@@ -1,9 +1,44 @@
+.container{
+	width: 100%;
+	padding: 5px;
+}
 .cardsContainer{
+	width: 90vw;
 	display: flex;
 	flex-direction: column;
+	/* grid-template-columns: auto auto; */
+	/* grid-template-columns: repeat(2fr); */
+
 }
+
+
+.newCardContainer{
+
+}
+
+.title{
+
+}
+
+/* CardEdit */
 .cardEdit{
-	border: 1px solid black;
+	box-shadow: 1px 1px 2px 2px #ccc;
+
+	/* border: 1px solid black; */
 	padding: 5px;
 	margin: 2px;
+}
+.actionContainer{
+	display: block;
+}
+.fieldContainer{
+	background-color: #cde8f6;
+
+}
+.fieldName{
+	color: #0033c7;
+	display: inline-block;
+	padding: 5px;
+	margin: 2px;
+
 }

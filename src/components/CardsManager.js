@@ -10,7 +10,7 @@ import '../css/card-manager.css'
 class CardsManager extends React.Component {
   constructor(props) {
 		super(props);
-		this.state = {cards:[],categories:[],	clickedCard:null , newCardSubmitted:false};
+		this.state = {cards:[] ,	clickedCard:null , newCardSubmitted:false};
 		this.getCards();
 		
 		// console.log("props",this.props.location.state.cards);
@@ -78,32 +78,32 @@ class CardsManager extends React.Component {
 			this.editCardState(card);
 			//this.setState({isLoading:false});
 	}
-	// callbacks for categories
-	onEditCategory = async (category) => {
+	// // callbacks for categories
+	// onEditCategory = async (category) => {
 
-	}
-	// deleting a category will delete all flashcards in this category
-	onDeleteCategory = async (category) => {
+	// }
+	// // deleting a category will delete all flashcards in this category
+	// onDeleteCategory = async (category) => {
 
-	}
-	onAddCategory = async (category) => {
+	// }
+	// onAddCategory = async (category) => {
 		
-	}
-	renderCategories(){
-		const categoriesComp = this.state.categories.map(
-			cat => {
-				return <div
-								className="category"
-								key={cat.id}
-								// editCategory={this.onEditCategory}
-								// deleteCategory={this.onDeleteCategory}
-								>
-									{cat.category}
-								</div>
-			}
-		);
-		return categoriesComp;
-	}
+	// }
+	// renderCategories(){
+	// 	const categoriesComp = this.state.categories.map(
+	// 		cat => {
+	// 			return <div
+	// 							className="category"
+	// 							key={cat.id}
+	// 							// editCategory={this.onEditCategory}
+	// 							// deleteCategory={this.onDeleteCategory}
+	// 							>
+	// 								{cat.category}
+	// 							</div>
+	// 		}
+	// 	);
+	// 	return categoriesComp;
+	// }
 	renderAllCards(){
 		const cardsComp = this.state.cards.map(
 			card => {
@@ -122,12 +122,16 @@ class CardsManager extends React.Component {
 		{
 			console.log("inside render edit",this.state.clickedCard);
 			return (
-			<Form
-			question={this.state.clickedCard.question}
-			answer={this.state.clickedCard.answer}
-			id={this.state.clickedCard.id}
-			callback={this.editCard}
-			></Form>
+				<div className="editCardContainer">
+					<h2 className="title">Edit Card</h2>
+					<Form
+					question={this.state.clickedCard.question}
+					answer={this.state.clickedCard.answer}
+					category = {this.state.clickedCard.category}
+					id={this.state.clickedCard.id}
+					callback={this.editCard}
+					></Form>
+				</div>
 			);
 		}				
 
@@ -135,18 +139,18 @@ class CardsManager extends React.Component {
   render() {
 		
     return (	
-					<div>
-						{this.renderCategories()}
+					<div className="container">
+						{/* {this.renderCategories()} */}
 						<div className="cardsContainer">
 						{this.renderAllCards()}
 						</div>
-						<div>
-						Add more cards
+						{this.renderEdit()}	
+						<div className="newCardContainer">
+							<h2 className="title">Add more cards</h2>
 						<CardNew
 							addCard={this.addCard}
 						></CardNew>
 						</div>
-					{this.renderEdit()}	
 					</div>);
   }
 }

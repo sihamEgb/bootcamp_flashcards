@@ -86,21 +86,22 @@ class Homepage extends React.Component{
   render(){
     console.log("homepage props",this.props);
     return (
-          <div>
-            <h1>Welcome to Flash Cards</h1>
-            <h3>Web development Edition</h3>
+          <div className="homepageContainer">
+            <h1 className="title">Welcome to Flash Cards</h1>
+            <h3 className="subtitle">Web development Edition</h3>
             <div className="playArea">
-              <div>Choose Categories</div>
+              <div className="miniTitle">Choose Categories</div>
               {/* {this.renderCategories()} */}
             </div>
             
-
-            <Link
+        <div className="primaryButtonContainer">
+            <Link className="primaryButton"
               to={{
                 pathname:'/flashcards' ,
                 state: {cards: this.props.cards}
               }}
               >Start Training</Link>
+        </div>
 
             {/* <Button
             text = "Start Training"

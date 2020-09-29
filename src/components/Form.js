@@ -8,7 +8,11 @@ class Form extends React.Component {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-		this.state = {question: this.props.question, answer:this.props.answer,id:this.props.id};
+		this.state = {
+			question: this.props.question, 
+			answer:this.props.answer,
+			category:this.props.category,
+			id:this.props.id};
 	}
 	
 	handleChange(event) {
@@ -27,6 +31,7 @@ class Form extends React.Component {
 		}
 		newCard.answer =  this.state.answer;
 		newCard.question = this.state.question;
+		newCard.category = this.state.category;
 		
 		console.log("in handleSubmit",newCard);
 		this.props.callback(newCard);
@@ -51,8 +56,14 @@ class Form extends React.Component {
 			</label>
 			<label>
 				Category:
+				<input type="text" name="category" 
+				value={this.state.category}
+				onChange={this.handleChange}
+			/>
 			</label>
-			<input type="submit" value="Submit" />
+			<div className="buttonContainer">
+			<input className="button" type="submit" value="Submit" />
+			</div>
 		</form>
 		);
 	}

@@ -1,17 +1,40 @@
+/* Colors */
+/* color: #eeeeee headers */
+/* color: #cde8f6 ligh blue header hove */
+/* color: #d195f9 ligh purple secondary*/
+/* color: #0033c7 blue primary text on header */
+
+/* Header */
 .header{
 	width: 100%;
-	background-color: grey;
+	background-color:#eeeeee;
 	padding: 5px;
 	display: flex;
 	flex-direction: row;
 }
-.myItem{
+.item{
 	padding: 5px;
-	color: white;
+	color: #0033c7;
 	text-decoration: none;
 }
-.myItem:hover {
-	text-decoration: underline;
+.item:hover {
+	/* text-decoration: underline; */
+	background-color: #cde8f6;
+}
+
+/* Homepage */
+.homepageContainer{
+	background-color: #cde8f6;
+}
+.title{
+	text-align: center;
+}
+.subtitle{
+	text-align: center;
+
+}
+.miniTitle{
+
 }
 .category{
 	border: 1px solid black;
@@ -21,4 +44,23 @@
 }
 .category:hover{
 	background-color: grey;
+}
+.primaryButtonContainer{
+	text-align: right;
+}
+.primaryButton{
+	/* width: 50%; */
+	display: inline-block;
+	color: white;
+	text-decoration: none;
+	background-color: #d195f9;
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	margin:  5px;
+	margin-right: 20px;
+}
+.primaryButton:hover{
+	background-color: #d135f9;
+
 }

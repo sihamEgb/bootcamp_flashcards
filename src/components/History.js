@@ -5,7 +5,6 @@ import Form from './Form';
 class History extends React.Component {
 	
 
-	
 	render(){
 		return (
 			<Form

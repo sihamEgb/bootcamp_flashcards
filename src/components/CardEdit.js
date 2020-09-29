@@ -23,10 +23,22 @@ class CardEdit extends React.Component{
 	render(){
 		return (
 			<div className="cardEdit">
+				<div className="fieldContainer">
+					<div className="fieldName">
+						Question
+					</div>
 				{this.props.card.question}
+				</div>
+				<div className="fieldContainer">
+				<div className="fieldName">
+					Answer
+					</div>
 				{this.props.card.answer}
-				<button onClick= {this.handleDelete} >Delete</button>
-				<button onClick= {this.handleEdit}>Edit</button>
+				</div>
+				<div className="actionContainer">
+					<button onClick= {this.handleDelete} >Delete</button>
+					<button onClick= {this.handleEdit}>Edit</button>
+				</div>
 			</div>
 		);
 	}

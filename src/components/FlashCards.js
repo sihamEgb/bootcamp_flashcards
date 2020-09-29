@@ -25,7 +25,7 @@ class FlashCards extends React.Component {
     });
   }
  
-
+  // TODO remove this
   async getCards() {
     const response = await mockapi.get("flashcards");
     this.setState({ cards: response.data , flashCardsNumber:response.data.length});
@@ -87,10 +87,11 @@ class FlashCards extends React.Component {
   }
   renderQuestion(){
     return (
-      <div>
-        <div>
+      <div className="cardContainer">
+        <div className="data">
           {this.state.currentCard ? this.state.currentCard.question : null}
         </div>
+        <div className="actionContainer">
         <Button
           text = 'New Card'
           callback = {this.onNewCard}
@@ -99,23 +100,28 @@ class FlashCards extends React.Component {
           text = 'Reveal Answer'
           callback = {this.onRevealAnswer}
         ></Button>
+
+        </div>
       </div>
     );
   }
   renderProgressBar(){
     return (
-      <div>
+      <div className="progressBar">
         Completed {this.state.completed}/{this.state.flashCardsNumber}
       </div>
     );
   }
   renderAnswer(){
     return (
-      <div>
-        <div>
+      <div className="cardContainer">
+        <div className="data">
           {this.state.currentCard.answer}
         </div>
+        <h3>
         Did you get it right?
+        </h3>
+        <div className="actionContainer">
         <Button
           text = 'Yes'
           callback = {this.onAnswerRight}
@@ -124,17 +130,26 @@ class FlashCards extends React.Component {
           text = 'No'
           callback = {this.onAnswerWrong}
         ></Button>
+        </div>
       </div>
     );
   }
 
   renderFinish(){
     const date = new Date();
-    let times = JSON.parse(localStorage.getItem(date.toDateString()));
-    times = times ? times+1 : 1;
-    localStorage.setItem(`${date.toDateString()}`, times);
+    let stats = JSON.parse(localStorage.getItem('stats'));
+    const newDate = date.toDateString();
+    //`${date.toDateString()}`
+    if(stats[stats.length-1] === newDate){
 
-    return (<div>
+    }
+    else{
+      stats.push(newDate);
+    }
+    //date.toDateString()
+    localStorage.setItem('stats',JSON.stringify(stats));
+
+    return (<div className="cardContainer">
       <h1>Done!</h1>
       {this.renderProgressBar()} 
       <Button
@@ -148,11 +163,17 @@ class FlashCards extends React.Component {
 
   render() {
     if(this.state.onFinished){
-      return this.renderFinish();
+      return (
+        <div className="bodyContainer">
+          {this.renderFinish()}
+        </div>
+      );
     }
     return (
-    <div>
+    <div className="bodyContainer">
+      <div className="actionContainer">
         {this.state.isAnswerRevealed ? this.renderAnswer()  : this.renderQuestion()} 
+      </div>
         {this.renderProgressBar()} 
     </div>
     );

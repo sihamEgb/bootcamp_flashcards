@@ -1,0 +1,24 @@
+label{
+	display: block;
+	margin: 5px;
+	text-align: center;
+}
+input{
+	/* text-align: right; */
+
+}
+.buttonContainer{
+	text-align: center;
+}
+.button{
+	width: 50%;
+	color: white;
+	background-color: #d195f9;
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	margin:  5px;
+}
+.button:hover{
+	background-color: #d145f9;
+}

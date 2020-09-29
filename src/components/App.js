@@ -23,6 +23,11 @@ class App extends React.Component{
   //   console.log("all cards",response);
   // }
 
+  // categories
+  /**
+    
+  Javascript Html CSS React JSON Nodejs
+   **/
   render(){
       return (
         <div>
